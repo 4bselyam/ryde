@@ -8,6 +8,7 @@ import React, { useEffect, useState } from 'react'
 import { FlatList, View, Text, Image, ActivityIndicator, TouchableOpacity } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import * as Location from 'expo-location'
+import { router } from 'expo-router'
 
 const recentRides = [
   {
@@ -117,7 +118,11 @@ const Home = () => {
 
   const handleSignOut = () => {}
 
-  const handleDestiantionPress = () => {}
+  const handleDestinationPress = (location: { latitude: number; longitude: number; address: string }) => {
+    setDestinationLocation(location)
+
+    router.push('/(root)/find-ride')
+  }
 
   useEffect(() => {
     const requestLocation = async () => {
@@ -188,7 +193,7 @@ const Home = () => {
             <GoogleTextInput
               icon={icons.search}
               containerStyle="bg-white shadow-md shadow-neutral-300"
-              handlePress={handleDestiantionPress}
+              handlePress={handleDestinationPress}
             />
 
             <>
